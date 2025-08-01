@@ -1,0 +1,18 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "entryFile": "main",
+  "compilerOptions": {
+    "assets": [
+      {
+        "include": "**/*.hbs",
+        "outDir": "dist"
+      },
+      {
+        "include": "**/*.json",
+        "outDir": "dist"
+      }
+    ],
+    "watchAssets": true
+  }
+}

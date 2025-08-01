@@ -1,0 +1,183 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./src/app/chatbot/ChatBot.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.chatbot-wrapper {
+  display: flex;
+  gap: 24px;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 90vw;
+  max-width: 1200px;
+  height: 80vh;
+}
+
+.results-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.results-header {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.results-timestamp {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.results-list li {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.result-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.result-sub {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.result-actions button {
+  margin-right: 8px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.result-summary {
+  background-color: #f8f8f8;
+  padding: 10px;
+  margin-top: 5px;
+  border-left: 3px solid #007bff;
+}
+
+.chat-section {
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-header {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 16px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.chat-box {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-message {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background-color: #3b82f6;
+  color: white;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.chat-input-area {
+  display: flex;
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-send-button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  font-size: 20px;
+}
+
+.chat-send-button:hover {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+.chat-send-button .rotated {
+  transform: rotate(-45deg) translateY(3px) translateX(-2px);
+}
