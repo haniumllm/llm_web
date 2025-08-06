@@ -2,14 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "@/styles/auth.module.css";
 
 export default function RegisterForm() {
   const [form, setForm] = useState({
     email: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
+
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,7 +27,7 @@ export default function RegisterForm() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/v1/auth/register", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,24 +35,30 @@ export default function RegisterForm() {
         body: JSON.stringify({
           email: form.email,
           password: form.password,
+          username: form.username,
         }),
       });
 
       if (!res.ok) {
-        throw new Error("회원가입 실패");
+        const errorData = await res.json();
+        alert(errorData.message || "회원가입 실패");
+        return;
       }
 
       const data = await res.json();
       console.log("회원가입 성공:", data);
       alert("회원가입이 완료되었습니다.");
+
+      router.push("/auth/login");
+
     } catch (error) {
       console.error(error);
       alert("회원가입 중 오류 발생");
     }
   };
 
-
   return (
+  <div className={styles.authPageBackground}>
     <div className={styles.authContainer}>
       <h1 className={styles.authTitle}>회원가입</h1>
       <form className={styles.authForm} onSubmit={handleSubmit}>
@@ -58,6 +68,17 @@ export default function RegisterForm() {
           placeholder="이메일"
           className={styles.authInput}
           value={form.email}
+          onChange={handleChange}
+          required
+          autoComplete="email"
+        />
+
+        <input
+          type="text"
+          name="username"
+          placeholder="닉네임"
+          className={styles.authInput}
+          value={form.username}
           onChange={handleChange}
           required
         />
@@ -70,6 +91,7 @@ export default function RegisterForm() {
           value={form.password}
           onChange={handleChange}
           required
+          autoComplete="new-password"
         />
 
         <input
@@ -90,5 +112,6 @@ export default function RegisterForm() {
         이미 계정이 있으신가요? <Link href="/auth/login">로그인</Link>
       </p>
     </div>
+  </div>
   );
 }

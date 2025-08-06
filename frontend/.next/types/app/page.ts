@@ -1,4 +1,4 @@
-// File: C:\Users\s\git\hanium\llm_web\frontend\src\app\page.tsx
+// File: C:\git\llm_web\llm_web\frontend\src\app\page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

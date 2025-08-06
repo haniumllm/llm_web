@@ -1,20 +1,25 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { User } from '@/users/user.entity';
+import { User } from '@/users/entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private usersRepo: Repository<User>,
     private jwtService: JwtService,
+    private config: ConfigService,
   ) {}
 
-  // 회원가입
   async register(dto: RegisterDto) {
     const exist = await this.usersRepo.findOne({ where: { email: dto.email } });
     if (exist) throw new ConflictException('이미 존재하는 이메일입니다.');
@@ -22,35 +27,54 @@ export class AuthService {
     const hashed = await bcrypt.hash(dto.password, 10);
     const user = this.usersRepo.create({
       email: dto.email,
+      username: dto.username,
       password: hashed,
       role: dto.role || 'USER',
     });
     await this.usersRepo.save(user);
 
-    return { message: '회원가입 성공' };
-  }
-
-  async login(dto: LoginDto) {
-    const user = await this.usersRepo.findOne({ where: { email: dto.email } });
-    if (!user) throw new UnauthorizedException('이메일 또는 비밀번호가 올바르지 않습니다.');
-
-    const isMatch = await bcrypt.compare(dto.password, user.password);
-    if (!isMatch) throw new UnauthorizedException('이메일 또는 비밀번호가 올바르지 않습니다.');
-
-    const payload = { sub: user.id, email: user.email, role: user.role };
-
-    const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
-    const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
-
     return {
-      message: '로그인 성공',
-      accessToken,
-      refreshToken,
+      message: '회원가입 성공',
       user: {
-        id: user.id,
+        id: user.userId,
         email: user.email,
         role: user.role,
+        username: user.username,
       },
     };
+  }
+
+  async validateUser(email: string, password: string) {
+    const user = await this.usersRepo.findOne({ where: { email } });
+    if (!user) return null;
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    return isMatch ? user : null;
+  }
+
+  generateAccessToken(user: User) {
+    const payload = {
+      sub: user.userId,
+      email: user.email,
+      role: user.role,
+      username: user.username,
+    };
+    return this.jwtService.sign(payload, {
+      secret: this.config.get<string>('JWT_SECRET'),
+      expiresIn: '15m',
+    });
+  }
+
+  generateRefreshToken(user: User) {
+    const payload = {
+      sub: user.userId,
+      email: user.email,
+      role: user.role,
+      username: user.username,
+    };
+    return this.jwtService.sign(payload, {
+      secret: this.config.get<string>('JWT_REFRESH_SECRET'),
+      expiresIn: '7d',
+    });
   }
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ClientLayout from "./ClientLayout";
 
 export const metadata: Metadata = {
   title: "Patent Navigator",
@@ -22,12 +20,8 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
-      <body className="antialiased flex flex-col min-h-screen">
-        <Header />
-
-        <main className="flex-1 bg-gray-50">{children}</main>
-
-        <Footer />
+      <body>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

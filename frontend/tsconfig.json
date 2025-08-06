@@ -30,6 +30,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src"
-, "next.config.js", "next.config.js"  ],
+, "next.config.js", "next.config.js", "../shared/types/types.ts"  ],
   "exclude": ["node_modules"]
 }
