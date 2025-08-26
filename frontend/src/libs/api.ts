@@ -27,3 +27,16 @@ export async function sendMessage(token: string, sessionId: string, message: str
   });
   return res.json();
 }
+
+export async function addMessageBookmark(payload: {
+  messageId: string | number;
+  sessionId: string | number;
+  title?: string;
+  excerpt?: string;
+}) {
+  const res = await fetch('/bookmarks', {
+    method: 'POST',
+    body: JSON.stringify({ type: 'message', ...payload }),
+  });
+  return res;
+}

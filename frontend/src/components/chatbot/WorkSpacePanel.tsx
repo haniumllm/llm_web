@@ -1,5 +1,5 @@
 // 작업 공간 패널
-import { Star as StarIcon, StickyNote as StickyNoteIcon, Plus as PlusIcon } from "lucide-react";
+import { StickyNoteIcon, PlusIcon, BookmarkIcon } from "lucide-react";
 import { BookmarkItem, NoteItem } from "@/types/types";
 import BookmarkList from "./BookmarkList";
 import NoteForm from "./NoteForm";
@@ -43,7 +43,7 @@ export default function WorkspacePanel({
       <div className="workspace-section">
         <div className="section-header">
           <h3>
-            <StarIcon size={16} /> 즐겨찾기
+            <BookmarkIcon size={16} /> 북마크
           </h3>
         </div>
         <BookmarkList bookmarks={bookmarks} removeBookmark={removeBookmark} />

@@ -21,8 +21,8 @@ interface SidePanelProps {
   isLoading: boolean;
   sessions: { id: string; title: string; updatedAt: Date }[];
   onSelectSession: (sessionId: string) => Promise<void>;
-  onUpdateSession?: (sessionId: string, newTitle: string) => Promise<void>; // 추가
-  onDeleteSession?: (sessionId: string) => Promise<void>; // 추가
+  onUpdateSession?: (sessionId: string, newTitle: string) => Promise<void>;
+  onDeleteSession?: (sessionId: string) => Promise<void>;
   addBookmark: (item: Omit<BookmarkItem, 'id' | 'timestamp'>) => void;
   activeAnalysisTool: AnalysisToolType;
   setActiveAnalysisTool: (tool: AnalysisToolType) => void;

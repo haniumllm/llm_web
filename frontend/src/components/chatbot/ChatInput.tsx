@@ -28,16 +28,10 @@ export default function ChatInput({
 
   return (
     <div className="chat-input-wrapper" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-
-
       <footer className="chat-input-container" style={{ display: "flex", gap: "0.8rem" }}>
-        <button
-          className="add-chat-button"
-          onClick={onNewAnalysisClick}
-        >
+        <button className="add-chat-button" onClick={onNewAnalysisClick}>
           <PlusIcon size={18} />
         </button>
-        
         <input
           type="text"
           className="chat-input"
@@ -47,16 +41,10 @@ export default function ChatInput({
           onKeyDown={handleKeyDown}
           disabled={isLoading}
         />
-        <button
-          className="send-button"
-          onClick={onSend}
-          disabled={!input.trim() || isLoading}
-        >
-          {isLoading ? (
-            <ArrowPathIcon className="animate-spin" size={16} />
-          ) : (
-            <PaperPlaneIcon size={16} />
-          )}
+        <button className="send-button" onClick={onSend} disabled={!input.trim() || isLoading}>
+          {isLoading ? 
+          (<ArrowPathIcon className="animate-spin" size={16} />)
+          : (<PaperPlaneIcon size={16}/>)}
         </button>
       </footer>
     </div>

@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ChatModule } from './chat/chat.module';
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { ChatModule } from './module/chat.module';
+import { AuthModule } from './module/auth.module';
+import { UsersModule } from './module/user.module';
+import { JwtAuthGuard } from './common/jwt/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { BookmarkModule } from './module/bookmark.module';
 
 @Module({
   imports: [
@@ -34,9 +37,13 @@ import { UsersModule } from './users/users.module';
       }),
     }),
 
+    BookmarkModule,
     ChatModule,
     AuthModule,
     UsersModule,
+  ],
+    providers: [
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
   ],
 })
 export class AppModule {}

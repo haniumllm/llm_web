@@ -1,8 +1,7 @@
 import { 
-  Plus as PlusIcon, 
-  Clock as ClockIcon, 
-  BookOpen as BookOpenIcon, 
-  Star as StarIcon 
+  ClockIcon, 
+  BookOpenIcon, 
+  BookmarkIcon 
 } from "lucide-react";
 import { TabType } from "@/types/types";
 
@@ -15,7 +14,7 @@ export default function TabHeader({ activeTab, setActiveTab }: TabHeaderProps) {
   const tabs = [
     { id: "analysis-history" as TabType, label: "분석 기록", icon: ClockIcon },
     { id: "analysis-tools" as TabType, label: "분석 도구", icon: BookOpenIcon },
-    { id: "workspace" as TabType, label: "작업공간", icon: StarIcon },
+    { id: "workspace" as TabType, label: "작업 공간", icon: BookmarkIcon },
   ];
 
   return (

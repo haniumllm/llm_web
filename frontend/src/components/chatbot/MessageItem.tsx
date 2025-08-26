@@ -8,7 +8,6 @@ interface MessageItemProps {
 export default function MessageItem({ message }: MessageItemProps) {
   const [showAll, setShowAll] = useState(false);
 
-  // 안전한 기본값
   const topPatents = message.analysisData?.topPatents ?? [];
   const recommendedActions = message.analysisData?.recommendedActions ?? [];
   const bypassStrategies = message.analysisData?.bypassStrategies ?? [];
@@ -16,11 +15,9 @@ export default function MessageItem({ message }: MessageItemProps) {
   return (
     <div className={`message-wrapper ${message.sender}`}>
       <div className="message-bubble">
-
-        {/* ✅ user 메시지는 항상 text 출력 */}
+        {/* user 메시지: text */}
         {message.sender === "user" && <p>{message.text}</p>}
-
-        {/* ✅ bot 메시지는 analysisData 전용 UI */}
+        {/* bot 메시지: analysisData*/}
         {message.sender === "bot" && (
           <>
             {message.analysisData ? (
@@ -33,7 +30,7 @@ export default function MessageItem({ message }: MessageItemProps) {
                   <p>위험도: {message.analysisData.riskLevel ?? "정보 없음"}</p>
                 </div>
 
-                {/* 🎯 대표 TOP 3 카드 */}
+                {/* TOP 3 */}
                 {topPatents.length > 0 ? (
                   <div className="analysis-section">
                     <h4>🎯 대표 유사 특허 TOP 3</h4>
